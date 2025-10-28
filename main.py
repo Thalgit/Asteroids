@@ -13,6 +13,7 @@ def main():
    
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
    
+    #raam sluit = stop program
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -20,6 +21,8 @@ def main():
 
         screen.fill("black")
         pygame.display.flip()
+        
+        #60 fps cap 
         dt = clock.tick(60) / 1000
 
 

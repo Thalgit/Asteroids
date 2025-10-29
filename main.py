@@ -1,8 +1,10 @@
 import pygame
+import sys
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from circleshape import *
 
 def main():
     print("Starting Asteroids!")
@@ -48,6 +50,10 @@ def main():
         dt = clock.tick(60) / 1000
 
         updatable.update(dt)
+
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                sys.exit("Game over!")
 
         screen.fill("black")
 

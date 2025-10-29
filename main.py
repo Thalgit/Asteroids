@@ -5,6 +5,7 @@ from player import *
 from asteroid import *
 from asteroidfield import *
 from circleshape import *
+from shots import *
 
 def main():
     print("Starting Asteroids!")
@@ -26,11 +27,17 @@ def main():
 
     asteroids = pygame.sprite.Group()
 
+    shots = pygame.sprite.Group()
+
+    #containers ook
+
     AsteroidField.containers = (updatable,)
 
     Asteroid.containers = (asteroids, updatable, drawable)
 
     Player.containers = (updatable, drawable)
+
+    Shot.containers = (updatable, drawable, shots)
 
     #player maken
 

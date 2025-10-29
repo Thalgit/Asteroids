@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import *
+from asteroidfield import *
 
 def main():
     print("Starting Asteroids!")
@@ -14,23 +16,45 @@ def main():
    
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    #groups maken
+
+    updatable = pygame.sprite.Group()
+
+    drawable = pygame.sprite.Group()
+
+    asteroids = pygame.sprite.Group()
+
+    AsteroidField.containers = (updatable,)
+
+    Asteroid.containers = (asteroids, updatable, drawable)
+
+    Player.containers = (updatable, drawable)
+
+    #player maken
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-   
-    #raam sluit = stop program
+
+    #veld maken
+
+    field = AsteroidField()
+
+    #raam sluit = stop en loop
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill("black")
-        player.draw(screen)
-        player.update(dt)
-        pygame.display.flip()
-        
-        #60 fps cap 
         dt = clock.tick(60) / 1000
 
+        updatable.update(dt)
 
+        screen.fill("black")
+
+        for thing in drawable:
+            thing.draw(screen)
+
+        pygame.display.flip()      
+        
 if __name__ == "__main__":
     main()

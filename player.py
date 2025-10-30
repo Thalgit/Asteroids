@@ -7,7 +7,8 @@ class Player(CircleShape):
 	def __init__(self, x, y):
 		super().__init__(x, y, PLAYER_RADIUS)
 		self.rotation = 0
-
+		self.shoot_cd = 0
+		
 	#player lijkt driehoek, is stiekem cirkel
 
 	def triangle(self):
@@ -42,7 +43,10 @@ class Player(CircleShape):
 		if keys[pygame.K_s]:
 			self.move(-dt)
 		if keys[pygame.K_SPACE]:
-			self.shoot()
+			if self.shoot_cd <= 0:
+				self.shoot()
+				self.shoot_cd = PLAYER_SHOOT_COOLDOWN
+		self.shoot_cd -= dt
 
 	# pewpewpew
 
@@ -51,3 +55,4 @@ class Player(CircleShape):
 		velocity = pygame.Vector2(0, 1)
 		velocity = velocity.rotate(self.rotation)
 		bullet.velocity = velocity * PLAYER_SHOOT_SPEED
+

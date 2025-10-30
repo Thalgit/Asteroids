@@ -21,7 +21,7 @@ class CircleShape(pygame.sprite.Sprite):
         # sub-classes must override
         pass
 
-#collision detection toevoegen
+#collision detection wajoo
 
     def collision(self, other_circle):
         distance = self.position.distance_to(other_circle.position)

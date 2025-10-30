@@ -1,3 +1,4 @@
+#import alle dingen
 import pygame
 import sys
 from constants import *
@@ -53,14 +54,29 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+        
+    #60 fps
 
         dt = clock.tick(60) / 1000
 
         updatable.update(dt)
 
+    #niet crashen
+
         for asteroid in asteroids:
             if player.collision(asteroid):
                 sys.exit("Game over!")
+
+    #asteroids kapot schieten
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision(asteroid):
+                    shot.kill()
+                    asteroid.split()
+                    break
+                
+    #graphics
 
         screen.fill("black")
 
